@@ -1,0 +1,10 @@
+name = "mindcops-revolution"
+type = "webpack"
+account_id = "786e56421522c0cd1b1977e311f0c6db"
+workers_dev = false
+route = "mindcops.floatingdown.stream/*"
+zone_id = "f8925ca4aa75911e67038de912d47ed6"
+
+[site]
+bucket = "./dist"
+entry-point = "workers-site"
