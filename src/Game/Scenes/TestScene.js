@@ -1,8 +1,13 @@
 import Phaser from 'phaser';
 
 import { Background } from '../Common/Background';
-import { Washout } from '../Common/Character/Washout';
-import { GAME_HEIGHT, GAME_WIDTH, GAME_SCALE } from '../config';
+import { Bunny } from '../Common/Character/Bunny';
+import { Cursor } from '../Common/Scene/Cursor';
+import {
+  GAME_HEIGHT,
+  GAME_WIDTH,
+  GAME_SCALE,
+} from '../config';
 
 const SCENE_WIDTH = GAME_WIDTH * 20;
 // const SCENE_HEIGHT = GAME_HEIGHT;
@@ -38,8 +43,11 @@ class TestScene extends Phaser.Scene {
    */
   backgrounds = {};
   sprites = {
-    washout: null,
+    cursor: null,
+    bunny: null,
   };
+  lastClickX = null;
+  lastClickY = null;
 
   constructor() {
     super({ key: 'TestScene' });
@@ -59,7 +67,8 @@ class TestScene extends Phaser.Scene {
         }))
     );
 
-    this.sprites.washout = new Washout(this);
+    this.sprites.bunny = new Bunny(this);
+    this.sprites.cursor = new Cursor(this);
   }
 
   create() {
@@ -75,12 +84,58 @@ class TestScene extends Phaser.Scene {
       this.backgrounds[name].create(container, SCENE_WIDTH);
     });
 
-    this.sprites.washout.create(GAME_WIDTH / 2, 340);
+    this.sprites.bunny.create(GAME_WIDTH / 2, 340);
+    this.sprites.cursor.create();
 
-    this.cameras.main.setBounds(0, 0, SCENE_WIDTH, GAME_HEIGHT);
-    this.cameras.main.startFollow(this.sprites.washout.sprite, true);
+    this.cameras.main.setBounds(
+      0,
+      0,
+      SCENE_WIDTH,
+      GAME_HEIGHT
+    );
+    this.cameras.main.startFollow(
+      this.sprites.bunny.sprite,
+      true
+    );
 
     this.setupFullscreenHandler();
+
+    const scene = this;
+
+    scene.input.on(
+      'pointerup',
+      function (pointer) {
+        this.lastClickX =
+          pointer.x + scene.cameras.main._scrollX;
+        this.lastClickY =
+          pointer.y + scene.cameras.main._scrollY;
+
+        this.sprites.bunny.goTo(
+          this.lastClickX,
+          this.lastClickY
+        );
+      },
+      this
+    );
+  }
+
+  update() {
+    const { lastClickX, lastClickY } = this;
+    const { bunny } = this.sprites;
+
+    if (
+      (bunny.direction === 'left' &&
+        bunny.sprite.x < lastClickX) ||
+      (bunny.direction === 'right' &&
+        bunny.sprite.x > lastClickX) ||
+      (bunny.direction === 'up' &&
+        bunny.sprite.y < lastClickY) ||
+      (bunny.direction === 'down' &&
+        bunny.sprite.y > lastClickY)
+    ) {
+      bunny.setIdle();
+    }
+    this.sprites.cursor.update();
   }
 
   setupFullscreenHandler() {
@@ -97,10 +152,6 @@ class TestScene extends Phaser.Scene {
       },
       this
     );
-  }
-
-  update() {
-    this.sprites.washout.update();
   }
 }
 

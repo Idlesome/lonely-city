@@ -1,8 +1,8 @@
-# mindcops-revolution
+TODO:
 
-"Gotta clean up the streets. At this point the entire planet is a city..."
+Hook in the assets from rabbit game project, rebuild initial scene
 
-# 🐝 bumblebee.floatingdown.stream
+# lonely-city
 
 # Setup
 

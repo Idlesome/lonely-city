@@ -1,3 +1,6 @@
+/**
+ * Not really working yet but a good idea
+ */
 import Phaser from 'phaser';
 
 const SPRITE_FOLDER = 'public/sprites/';
@@ -33,7 +36,9 @@ class PlayableCharacter extends Phaser.GameObjects.Sprite {
     animations.forEach(animationName =>
       this.anims.create({
         key: `${this.name}-${animationName}`,
-        frames: this.anims.generateFrameNames(`${this.name}-${animationName}`),
+        frames: this.anims.generateFrameNames(
+          `${this.name}-${animationName}`
+        ),
         frameRate: 5,
         repeat: -1,
       })
