@@ -130,7 +130,7 @@ class Bunny {
       });
     });
 
-    // Add Washout to the world, allowing him
+    // Add Bunny to the world, allowing him
     // to have physics so he can move with "velocity"
     this.sprite = scene.physics.add
       .sprite(x, y, 'bunny')
