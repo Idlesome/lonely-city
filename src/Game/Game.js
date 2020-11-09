@@ -2,7 +2,11 @@ import Phaser from 'phaser';
 
 import { TestScene } from './Scenes/TestScene';
 
-import { GAME_WIDTH, GAME_HEIGHT, GAME_SCALE } from './config';
+import {
+  GAME_WIDTH,
+  GAME_HEIGHT,
+  GAME_SCALE,
+} from './config';
 
 const config = {
   type: Phaser.AUTO,
@@ -21,9 +25,9 @@ const config = {
   // },
   physics: {
     default: 'arcade',
-    // arcade: {
-    //   debug: true,
-    // },
+    arcade: {
+      debug: false,
+    },
   },
   pixelArt: true,
   fps: {
@@ -35,5 +39,4 @@ const config = {
     // , TitleScene, GameScene
   ],
 };
-
 const game = new Phaser.Game(config);
