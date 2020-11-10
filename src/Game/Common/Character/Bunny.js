@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 import { GAME_SCALE } from '../../config';
 
 // const SPEED = 100;
-const SPEED = 64;
+const SPEED = 150;
 
 const DEBUG = false;
 
