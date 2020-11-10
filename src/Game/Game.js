@@ -2,11 +2,7 @@ import Phaser from 'phaser';
 
 import { TestScene } from './Scenes/TestScene';
 
-import {
-  GAME_WIDTH,
-  GAME_HEIGHT,
-  GAME_SCALE,
-} from './config';
+import { GAME_WIDTH, GAME_HEIGHT } from './config';
 
 const config = {
   type: Phaser.AUTO,
@@ -16,8 +12,8 @@ const config = {
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   parent: 'mindcops',
-  width: GAME_WIDTH * GAME_SCALE,
-  height: GAME_HEIGHT * GAME_SCALE,
+  width: GAME_WIDTH,
+  height: GAME_HEIGHT,
   // scene: {
   //   preload: preload,
   //   create: create,

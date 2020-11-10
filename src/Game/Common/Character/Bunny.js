@@ -134,7 +134,7 @@ class Bunny {
     // to have physics so he can move with "velocity"
     this.sprite = scene.physics.add
       .sprite(x, y, 'bunny')
-      .setScale(2 * GAME_SCALE);
+      .setScale(GAME_SCALE);
     this
       // Start playing his idle animation to start off
       .play('bunny-idle-down');
