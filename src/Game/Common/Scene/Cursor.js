@@ -28,7 +28,7 @@ class Cursor {
 
     this.sprite = scene.add
       .image(0, 0, 'cursor')
-      .setScale(0.05)
+      .setScale(1)
       .setVisible(false);
 
     scene.input.on(
