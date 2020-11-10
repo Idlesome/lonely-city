@@ -55,6 +55,8 @@ class Bunny {
     D: null,
   };
   animationName = null;
+  latestKeyPressed = null;
+  keysDown = 0;
   direction = 'up';
 
   constructor(scene) {
@@ -139,10 +141,93 @@ class Bunny {
       // Start playing his idle animation to start off
       .play('bunny-idle-down');
 
-    // this.keys = scene.input.keyboard.addKeys('W,S,A,D');
+    walkingAnimations.forEach(({ key }) => {
+      scene.input.keyboard.addKey(key).on('down', () => {
+        const { W, A, S, D } = MOVEMENT_KEYS;
+
+        this.latestKeyPressed = key;
+        this.keysDown = [
+          W.isDown,
+          A.isDown,
+          S.isDown,
+          D.isDown,
+        ].filter(keep => keep).length;
+      });
+      scene.input.keyboard.addKey(key).on('up', () => {
+        const { W, A, S, D } = MOVEMENT_KEYS;
+        this.keysDown = [
+          W.isDown,
+          A.isDown,
+          S.isDown,
+          D.isDown,
+        ].filter(keep => keep).length;
+        // None of them are down - return to idle animation
+        if (
+          !W.isDown &&
+          !A.isDown &&
+          !S.isDown &&
+          !D.isDown
+        ) {
+          if (key === 'W') {
+            this.setIdle('up');
+            return;
+          }
+          this.setIdle('down');
+        }
+      });
+    });
   }
 
-  update() {}
+  update() {
+    // Reset the rabbit's velocity to stop him from
+    // scating away in the direction he was heading...
+    this.sprite.setVelocity(0);
+
+    // For each of the rabbits movements, check if
+    // a key is being pressed...
+    walkingAnimations.forEach(({ direction, key }) => {
+      // Check if this key is down
+      if (MOVEMENT_KEYS[key].isDown) {
+        // Multiple keys down, use latest key pressed
+        if (
+          this.keysDown > 1 &&
+          this.latestKeyPressed === key
+        ) {
+          this.setDirection(direction);
+        }
+        // One key down, use that key
+        if (this.keysDown === 1) {
+          this.setDirection(direction);
+        }
+        this.move(direction);
+      }
+    });
+  }
+
+  move(direction) {
+    switch (direction) {
+      case 'up':
+        {
+          this.sprite.setVelocityY(-SPEED);
+        }
+        break;
+      case 'down':
+        {
+          this.sprite.setVelocityY(SPEED);
+        }
+        break;
+      case 'left':
+        {
+          this.sprite.setVelocityX(-SPEED);
+        }
+        break;
+      case 'right':
+        {
+          this.sprite.setVelocityX(SPEED);
+        }
+        break;
+    }
+  }
 
   goTo(x, y) {
     this.scene.physics.moveTo(this.sprite, x, y, SPEED);
@@ -189,9 +274,8 @@ class Bunny {
       : this.setAnimationName(animationName);
   };
 
-  setIdle() {
-    this.sprite.setVelocity(0);
-    this.play('bunny-idle-down');
+  setIdle(direction) {
+    this.play('bunny-idle-' + direction);
   }
 }
 export { Bunny };

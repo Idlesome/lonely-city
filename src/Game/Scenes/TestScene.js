@@ -103,32 +103,13 @@ class TestScene extends Phaser.Scene {
           pointer.x + scene.cameras.main._scrollX;
         this.lastClickY =
           pointer.y + scene.cameras.main._scrollY;
-
-        this.sprites.bunny.goTo(
-          this.lastClickX,
-          this.lastClickY
-        );
       },
       this
     );
   }
 
   update() {
-    const { lastClickX, lastClickY } = this;
-    const { bunny } = this.sprites;
-
-    if (
-      (bunny.direction === 'left' &&
-        bunny.sprite.x < lastClickX) ||
-      (bunny.direction === 'right' &&
-        bunny.sprite.x > lastClickX) ||
-      (bunny.direction === 'up' &&
-        bunny.sprite.y < lastClickY) ||
-      (bunny.direction === 'down' &&
-        bunny.sprite.y > lastClickY)
-    ) {
-      bunny.setIdle();
-    }
+    this.sprites.bunny.update();
     this.sprites.cursor.update();
 
     this.backgrounds['02clouds'].update();
