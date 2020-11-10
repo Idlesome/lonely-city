@@ -176,32 +176,6 @@ class Bunny {
         }
       });
     });
-
-    // scene.input.keyboard.on('keyup', event => {
-    //   const eventKey = event.key.toUpperCase();
-    //   // W, A, S or D have just triggered a keyup event
-    //   if (
-    //     Object.keys(MOVEMENT_KEYS).some(
-    //       key => key === eventKey
-    //     )
-    //   ) {
-    //     const { W, A, S, D } = MOVEMENT_KEYS;
-    //     this.keysDown = this.keysDown - 1;
-    //     // None of them are down - return to idle animation
-    //     if (
-    //       !W.isDown &&
-    //       !A.isDown &&
-    //       !S.isDown &&
-    //       !D.isDown
-    //     ) {
-    //       if (eventKey === 'W') {
-    //         this.setIdle('up');
-    //         return;
-    //       }
-    //       this.setIdle('down');
-    //     }
-    //   }
-    // });
   }
 
   update() {
@@ -225,16 +199,6 @@ class Bunny {
         if (this.keysDown === 1) {
           this.setDirection(direction);
         }
-
-        // if (
-        //   this.keysDown > 1 &&
-        //   this.direction !== direction &&
-        //   this.latestKeyPressed === key
-        // ) {
-        //   this.setDirection(direction);
-        // } else {
-        //   this.setDirection(direction);
-        // }
         this.move(direction);
       }
     });
@@ -294,8 +258,6 @@ class Bunny {
   }
 
   setDirection(direction) {
-    // console.log(direction);
-    // console.log(this.keysDown);
     this.direction = direction;
     this.play('bunny-' + direction);
   }
