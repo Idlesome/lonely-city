@@ -16,24 +16,17 @@ const SCENE_WIDTH = GAME_WIDTH * 20;
 // fewer lines of code
 const layers = [
   {
-    name: '01background',
-    pallaxFactor: 0.08,
-  },
-  {
-    name: '02buildings_third_layer',
-    pallaxFactor: 0.16,
-  },
-  {
-    name: '03buildings_second_layer',
-    pallaxFactor: 0.22,
-  },
-  {
-    name: '04buildings_first_layer',
-    pallaxFactor: 0.4,
-  },
-  {
-    name: '05platform',
+    name: '01walkway',
     pallaxFactor: 1,
+  },
+  {
+    name: '02clouds',
+    pallaxFactor: 0.08,
+    passiveX: 0.08,
+  },
+  {
+    name: '03mountains',
+    pallaxFactor: 0.16,
   },
 ];
 
@@ -50,7 +43,7 @@ class TestScene extends Phaser.Scene {
   lastClickY = null;
 
   constructor() {
-    super({ key: 'TestScene' });
+    super({ key: 'Beach' });
   }
 
   /**
@@ -58,12 +51,13 @@ class TestScene extends Phaser.Scene {
    */
   preload() {
     layers.forEach(
-      ({ name, pallaxFactor }) =>
+      ({ name, pallaxFactor, passiveX }) =>
         (this.backgrounds[name] = new Background({
-          sceneName: 'TestScene',
+          sceneName: 'Beach',
           assetName: name,
           pallaxFactor,
           context: this,
+          passiveX,
         }))
     );
 
@@ -84,7 +78,7 @@ class TestScene extends Phaser.Scene {
       this.backgrounds[name].create(container, SCENE_WIDTH);
     });
 
-    this.sprites.bunny.create(GAME_WIDTH / 2, 340);
+    this.sprites.bunny.create(100, 300);
     this.sprites.cursor.create();
 
     this.cameras.main.setBounds(
@@ -136,6 +130,8 @@ class TestScene extends Phaser.Scene {
       bunny.setIdle();
     }
     this.sprites.cursor.update();
+
+    this.backgrounds['02clouds'].update();
   }
 
   setupFullscreenHandler() {

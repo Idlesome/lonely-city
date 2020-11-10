@@ -1,4 +1,9 @@
-import { GAME_WIDTH, GAME_HEIGHT } from '../config';
+import {
+  GAME_CENTER_X,
+  GAME_CENTER_Y,
+  GAME_HEIGHT,
+  GAME_WIDTH,
+} from '../config';
 
 /**
  * Background generator class
@@ -10,6 +15,7 @@ class Background {
   sceneName = null;
   tileSprite = null;
   context = null;
+  passiveX = null;
 
   /**
    * A background tile sprite
@@ -17,11 +23,18 @@ class Background {
    * @param {*} sceneName the name of the scene
    * @param {*} assetName the name of the asset
    */
-  constructor({ sceneName, assetName, pallaxFactor, context }) {
+  constructor({
+    sceneName,
+    assetName,
+    pallaxFactor,
+    context,
+    passiveX = null,
+  }) {
     this.sceneName = sceneName;
     this.assetName = assetName;
     this.pallaxFactor = pallaxFactor;
     this.context = context;
+    this.passiveX = passiveX;
 
     // Automatically preload asset
     this.preload();
@@ -52,8 +65,8 @@ class Background {
       // name here is what tells it which background to use
       // we actually set that up in preload
       .tileSprite(
-        GAME_WIDTH / 2,
-        GAME_HEIGHT / 2,
+        0,
+        GAME_CENTER_Y,
         backgroundWidth,
         GAME_HEIGHT,
         assetName
@@ -65,6 +78,12 @@ class Background {
     container.add(this.tileSprite);
 
     this.tileSprite.setScrollFactor(this.pallaxFactor, 1);
+  }
+
+  update() {
+    // Clouds breeze passive movement
+    if (this.passiveX)
+      this.tileSprite.tilePositionX += this.passiveX;
   }
 }
 
