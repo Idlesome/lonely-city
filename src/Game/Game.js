@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { TestScene } from './Scenes/TestScene';
+import { Archway } from './Scenes/Archway';
 
 import { GAME_WIDTH, GAME_HEIGHT } from './config';
 
@@ -31,7 +31,7 @@ const config = {
     forceSetTimeOut: true,
   },
   scene: [
-    TestScene,
+    Archway,
     // , TitleScene, GameScene
   ],
 };

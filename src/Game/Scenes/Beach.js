@@ -30,7 +30,7 @@ const layers = [
   },
 ];
 
-class TestScene extends Phaser.Scene {
+class Beach extends Phaser.Scene {
   /**
    * @param backgrounds A place to store our background sprites
    */
@@ -132,4 +132,4 @@ class TestScene extends Phaser.Scene {
   }
 }
 
-export { TestScene };
+export { Beach };
