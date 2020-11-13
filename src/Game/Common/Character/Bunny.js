@@ -139,7 +139,9 @@ class Bunny {
       .setScale(GAME_SCALE);
     this
       // Start playing his idle animation to start off
-      .play('bunny-idle-down');
+      .play('bunny-idle-down')
+      //
+      .setSize(20, 24, true);
 
     walkingAnimations.forEach(({ key }) => {
       scene.input.keyboard.addKey(key).on('down', () => {

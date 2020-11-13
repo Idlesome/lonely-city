@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 
 import { Archway } from './Scenes/Archway';
+import { Beach } from './Scenes/Beach';
 
-import { GAME_WIDTH, GAME_HEIGHT } from './config';
+import { GAME_WIDTH, GAME_HEIGHT, DEBUG } from './config';
 
 const config = {
   type: Phaser.AUTO,
@@ -22,7 +23,7 @@ const config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: false,
+      debug: DEBUG,
     },
   },
   pixelArt: true,
@@ -31,6 +32,7 @@ const config = {
     forceSetTimeOut: true,
   },
   scene: [
+    Beach,
     Archway,
     // , TitleScene, GameScene
   ],

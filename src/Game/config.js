@@ -6,3 +6,5 @@ export const GAME_CENTER_X = 512;
 export const GAME_CENTER_Y = 384;
 // export const GAME_SCALE = 1.5;
 export const GAME_SCALE = 4;
+
+export const DEBUG = true;

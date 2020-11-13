@@ -9,7 +9,7 @@ import {
   GAME_SCALE,
 } from '../config';
 
-const SCENE_WIDTH = GAME_WIDTH * 20;
+const SCENE_WIDTH = GAME_WIDTH * 3;
 // const SCENE_HEIGHT = GAME_HEIGHT;
 
 // A list of our assets so we can load them in using

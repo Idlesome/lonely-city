@@ -66,11 +66,12 @@ class Background {
       // we actually set that up in preload
       .tileSprite(
         0,
-        GAME_CENTER_Y,
+        0,
         backgroundWidth,
         GAME_HEIGHT,
         assetName
       )
+      .setOrigin(0)
       // Give it a name... we don't really need to do this
       // but it might be useful one day
       .setName(`${assetName}-tile`);

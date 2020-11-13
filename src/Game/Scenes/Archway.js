@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import { Background } from '../Common/Background';
+import { BoundingBox } from '../Common/Scene/BoundingBox';
 import { Bunny } from '../Common/Character/Bunny';
 import { Cursor } from '../Common/Scene/Cursor';
 import {
@@ -78,6 +79,28 @@ class Archway extends Phaser.Scene {
   }
 
   create() {
+    this.createBackgroundLayers();
+
+    this.sprites.bunny.create(43, 589);
+
+    this.createForegroundLayers();
+
+    this.sprites.cursor.create();
+
+    this.createBoundingBoxes();
+
+    this.setupCamera();
+    // TODO: Trigger start of next scene...
+  }
+
+  update() {
+    this.sprites.bunny.update();
+    this.sprites.cursor.update();
+
+    this.backgrounds['02archwayclouds'].update();
+  }
+
+  createBackgroundLayers() {
     const backgroundContainer = this.add
       .container(0, 0)
       .setName('backgrounds-container')
@@ -92,14 +115,15 @@ class Archway extends Phaser.Scene {
         SCENE_WIDTH
       );
     });
+  }
 
-    this.sprites.bunny.create(100, 300);
-
+  createForegroundLayers() {
     const foregroundContainer = this.add
       .container(0, 0)
       .setName('foregrounds-container')
       .setSize(GAME_WIDTH, GAME_HEIGHT)
       .setScale(GAME_SCALE);
+
     // For each of our assets...
     foregroundLayers.forEach(({ name }) => {
       // Create a background and add it to container
@@ -108,9 +132,34 @@ class Archway extends Phaser.Scene {
         SCENE_WIDTH
       );
     });
+  }
 
-    this.sprites.cursor.create();
+  createBoundingBoxes() {
+    const { bunny } = this.sprites;
 
+    // Walkway bottom
+    new BoundingBox(0, 633, 983, 69).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway top
+    new BoundingBox(6, 362, 997, 112).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway right
+    new BoundingBox(984, 216, 31, 486).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway right
+    new BoundingBox(493, 296, -208, -174).create(
+      this,
+      bunny.sprite
+    );
+  }
+
+  setupCamera() {
     this.cameras.main.setBounds(
       0,
       0,
@@ -121,28 +170,6 @@ class Archway extends Phaser.Scene {
       this.sprites.bunny.sprite,
       true
     );
-
-    this.setupFullscreenHandler();
-
-    const scene = this;
-
-    scene.input.on(
-      'pointerup',
-      function (pointer) {
-        this.lastClickX =
-          pointer.x + scene.cameras.main._scrollX;
-        this.lastClickY =
-          pointer.y + scene.cameras.main._scrollY;
-      },
-      this
-    );
-  }
-
-  update() {
-    this.sprites.bunny.update();
-    this.sprites.cursor.update();
-
-    this.backgrounds['02archwayclouds'].update();
   }
 
   setupFullscreenHandler() {
