@@ -14,7 +14,7 @@ const SCENE_WIDTH = GAME_WIDTH;
 
 // A list of our assets so we can load them in using
 // fewer lines of code
-const layers = [
+const backgroundLayers = [
   {
     name: '03archwaysky',
     pallaxFactor: 0.16,
@@ -28,10 +28,18 @@ const layers = [
     name: '01archwaywalkway',
     pallaxFactor: 1,
   },
+];
+// A list of our assets so we can load them in using
+// fewer lines of code
+const foregroundLayers = [
   {
     name: '04awfrontbricks',
     pallaxFactor: 1,
   },
+];
+const allLayers = [
+  ...backgroundLayers,
+  ...foregroundLayers,
 ];
 
 class Archway extends Phaser.Scene {
@@ -54,7 +62,7 @@ class Archway extends Phaser.Scene {
    * This stuff loads before the game starts; stuff like scenes and whatnot.
    */
   preload() {
-    layers.forEach(
+    allLayers.forEach(
       ({ name, pallaxFactor, passiveX }) =>
         (this.backgrounds[name] = new Background({
           sceneName: 'Archway',
@@ -70,19 +78,37 @@ class Archway extends Phaser.Scene {
   }
 
   create() {
-    const container = this.add
+    const backgroundContainer = this.add
       .container(0, 0)
       .setName('backgrounds-container')
       .setSize(GAME_WIDTH, GAME_HEIGHT)
       .setScale(GAME_SCALE);
 
     // For each of our assets...
-    layers.forEach(({ name }) => {
+    backgroundLayers.forEach(({ name }) => {
       // Create a background and add it to container
-      this.backgrounds[name].create(container, SCENE_WIDTH);
+      this.backgrounds[name].create(
+        backgroundContainer,
+        SCENE_WIDTH
+      );
     });
 
     this.sprites.bunny.create(100, 300);
+
+    const foregroundContainer = this.add
+      .container(0, 0)
+      .setName('foregrounds-container')
+      .setSize(GAME_WIDTH, GAME_HEIGHT)
+      .setScale(GAME_SCALE);
+    // For each of our assets...
+    foregroundLayers.forEach(({ name }) => {
+      // Create a background and add it to container
+      this.backgrounds[name].create(
+        foregroundContainer,
+        SCENE_WIDTH
+      );
+    });
+
     this.sprites.cursor.create();
 
     this.cameras.main.setBounds(
