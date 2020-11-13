@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { Background } from '../Common/Background';
 import { Bunny } from '../Common/Character/Bunny';
 import { Cursor } from '../Common/Scene/Cursor';
+import { BoundingBox } from '../Common/Scene/BoundingBox';
 import {
   GAME_HEIGHT,
   GAME_WIDTH,
@@ -78,8 +79,10 @@ class Beach extends Phaser.Scene {
       this.backgrounds[name].create(container, SCENE_WIDTH);
     });
 
-    this.sprites.bunny.create(100, 300);
+    this.sprites.bunny.create(101, 596);
     this.sprites.cursor.create();
+
+    this.createBoundingBoxes();
 
     this.cameras.main.setBounds(
       0,
@@ -113,6 +116,46 @@ class Beach extends Phaser.Scene {
     this.sprites.cursor.update();
 
     this.backgrounds['02clouds'].update();
+  }
+
+  createBoundingBoxes() {
+    const { bunny } = this.sprites;
+
+    // Walkway bottom
+    new BoundingBox(369, 633, 983, 69).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway top
+    new BoundingBox(345, 362, 997, 112).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway right
+    new BoundingBox(984, 216, 31, 486).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway right
+    new BoundingBox(493, 296, -208, -174).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway right
+    new BoundingBox(984, 216, 31, 486).create(
+      this,
+      bunny.sprite
+    );
+    // Walkway right
+    new BoundingBox(984, 216, 31, 486).create(
+      this,
+      bunny.sprite
+    );
+    //beach top 1
+    new BoundingBox(11, 297, 331, 80).create(
+      this,
+      bunny.sprite
+    );
   }
 
   setupFullscreenHandler() {
