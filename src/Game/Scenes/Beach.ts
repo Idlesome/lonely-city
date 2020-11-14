@@ -6,6 +6,8 @@ import { Background } from '../Common/Background';
 import { Bunny } from '../Common/Character/Bunny';
 import { Cursor } from '../Common/Scene/Cursor';
 import { BoundingBox } from '../Common/Scene/BoundingBox';
+import { Debugger } from 'Common/Debug/Debugger';
+
 import {
   startSceneOnWorldBounds,
   setupCamera,
@@ -49,8 +51,7 @@ class Beach extends Phaser.Scene {
     cursor: null,
     bunny: null,
   };
-  lastClickX = null;
-  lastClickY = null;
+  debugger;
 
   constructor() {
     super({ key: 'Beach' });
@@ -75,7 +76,7 @@ class Beach extends Phaser.Scene {
     this.sprites.cursor = new Cursor(this);
   }
 
-  create() {
+  create({ bunnyStartX = 101, bunnyStartY = 596 }) {
     const container = this.add
       .container(0, 0)
       .setName('backgrounds-container')
@@ -88,18 +89,21 @@ class Beach extends Phaser.Scene {
       this.backgrounds[name].create(container, SCENE_WIDTH);
     });
 
-    this.sprites.bunny.create(101, 596);
+    this.sprites.bunny.create(bunnyStartX, bunnyStartY);
     this.sprites.cursor.create();
 
     this.createBoundingBoxes();
 
     startSceneOnWorldBounds('right', 'Archway', this);
     setupCamera(this, SCENE_WIDTH);
+
+    this.debugger = new Debugger(this);
   }
 
   update() {
     this.sprites.bunny.update();
     this.sprites.cursor.update();
+    this.debugger.update();
 
     this.backgrounds['02clouds'].update();
   }

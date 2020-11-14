@@ -4,28 +4,33 @@ import { GAME_HEIGHT, SCENE_FADE_DURATION } from 'config';
 
 let sceneTransitioning = false;
 export function startSceneOnWorldBounds(
-  side:string,
-  nextSceneName:string,
-  scene:Phaser.Scene
+  side: string,
+  nextSceneName: string,
+  scene: Phaser.Scene,
+  sceneData = {}
 ) {
   scene.physics.world.on(
     'worldbounds',
     (body, up, down, left, right) => {
       const sides = { up, down, left, right };
       if (!sceneTransitioning && sides[side]) {
-        startScene(nextSceneName, scene);
+        startScene(nextSceneName, scene, sceneData);
       }
     }
   );
 }
 
-export function startScene(sceneName:string, scene:Phaser.Scene) {
+export function startScene(
+  sceneName: string,
+  scene: Phaser.Scene,
+  sceneData = {}
+) {
   sceneTransitioning = true;
   scene.cameras.main.fade(SCENE_FADE_DURATION, 0, 0, 0);
   scene.cameras.main.once(
     Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
     () => {
-      scene.scene.start(sceneName);
+      scene.scene.start(sceneName, sceneData);
     }
   );
 }

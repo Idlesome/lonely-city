@@ -56,8 +56,6 @@ class Archway extends Phaser.Scene {
     cursor: null,
     bunny: null,
   };
-  lastClickX = null;
-  lastClickY = null;
 
   constructor() {
     super({ key: 'Archway' });
@@ -90,7 +88,10 @@ class Archway extends Phaser.Scene {
 
     this.createBoundingBoxes();
 
-    startSceneOnWorldBounds('left', 'Beach', this);
+    startSceneOnWorldBounds('left', 'Beach', this, {
+      bunnyStartX: 4056,
+      bunnyStartY: 551,
+    });
     setupCamera(this, SCENE_WIDTH);
   }
 
