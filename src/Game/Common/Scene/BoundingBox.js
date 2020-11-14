@@ -3,12 +3,14 @@ class BoundingBox {
   y = null;
   w = null;
   h = null;
+  name = null;
 
-  constructor(x, y, w, h) {
+  constructor(x, y, w, h, name = 'unknown') {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.name = name;
   }
   create(scene, collideWith) {
     const { x, y, w, h } = this;
