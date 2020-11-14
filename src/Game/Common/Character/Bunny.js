@@ -143,6 +143,8 @@ class Bunny {
       //
       .setSize(20, 24, true);
 
+    this.sprite.setCollideWorldBounds(true);
+
     walkingAnimations.forEach(({ key }) => {
       scene.input.keyboard.addKey(key).on('down', () => {
         const { W, A, S, D } = MOVEMENT_KEYS;

@@ -98,8 +98,6 @@ class Cursor {
             relativeY + scene.cameras.main._scrollY - startY
           );
           break;
-        case 'polygon':
-          break;
       }
     }
   }
@@ -167,17 +165,6 @@ class Cursor {
                 copyToClipboard(`${x}, ${y}, ${w}, ${h}`);
               }
               this.selecting = !this.selecting;
-              break;
-            case 'polygon':
-              // if(!this.selecting){
-              //   this.points.push(this.relativeX +
-              //     scene.cameras.main._scrollX);
-              //   this.points.push(this.relativeY +
-              //     scene.cameras.main._scrollY);
-
-              //   this.shape = new Phaser.Polygon(this.points);
-              //   this.selecting = true;
-              // }
               break;
           }
 
