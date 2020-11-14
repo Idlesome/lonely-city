@@ -137,11 +137,14 @@ class Bunny {
     this.sprite = scene.physics.add
       .sprite(x, y, 'bunny')
       .setScale(GAME_SCALE);
+    // Set bounding box size
+    this.sprite.body
+      .setSize(16, 8, false)
+      // Set bounding box offset
+      .setOffset(8, 22);
     this
       // Start playing his idle animation to start off
-      .play('bunny-idle-down')
-      //
-      .setSize(20, 24, true);
+      .play('bunny-idle-down');
 
     this.sprite.setCollideWorldBounds(true);
 
