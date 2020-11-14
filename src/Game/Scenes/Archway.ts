@@ -22,16 +22,16 @@ const SCENE_WIDTH = GAME_WIDTH;
 const backgroundLayers = [
   {
     name: '03archwaysky',
-    pallaxFactor: 0.16,
+    parallaxFactor: 0.16,
   },
   {
     name: '02archwayclouds',
-    pallaxFactor: 0.08,
+    parallaxFactor: 0.08,
     passiveX: 0.08,
   },
   {
     name: '01archwaywalkway',
-    pallaxFactor: 1,
+    parallaxFactor: 1,
   },
 ];
 // A list of our assets so we can load them in using
@@ -39,7 +39,7 @@ const backgroundLayers = [
 const foregroundLayers = [
   {
     name: '04awfrontbricks',
-    pallaxFactor: 1,
+    parallaxFactor: 1,
   },
 ];
 const allLayers = [
@@ -68,11 +68,11 @@ class Archway extends Phaser.Scene {
    */
   preload() {
     allLayers.forEach(
-      ({ name, pallaxFactor, passiveX }:any) =>
+      ({ name, parallaxFactor, passiveX }: any) =>
         (this.backgrounds[name] = new Background({
           sceneName: 'Archway',
           assetName: name,
-          pallaxFactor,
+          parallaxFactor,
           context: this,
           passiveX,
         }))

@@ -1,9 +1,4 @@
-import {
-  GAME_CENTER_X,
-  GAME_CENTER_Y,
-  GAME_HEIGHT,
-  GAME_WIDTH,
-} from '../config';
+import { GAME_HEIGHT } from 'config';
 
 /**
  * Background generator class
@@ -16,6 +11,7 @@ class Background {
   tileSprite = null;
   context = null;
   passiveX = null;
+  parallaxFactor = null;
 
   /**
    * A background tile sprite
@@ -26,13 +22,13 @@ class Background {
   constructor({
     sceneName,
     assetName,
-    pallaxFactor,
+    parallaxFactor,
     context,
     passiveX = null,
   }) {
     this.sceneName = sceneName;
     this.assetName = assetName;
-    this.pallaxFactor = pallaxFactor;
+    this.parallaxFactor = parallaxFactor;
     this.context = context;
     this.passiveX = passiveX;
 
@@ -78,7 +74,7 @@ class Background {
 
     container.add(this.tileSprite);
 
-    this.tileSprite.setScrollFactor(this.pallaxFactor, 1);
+    this.tileSprite.setScrollFactor(this.parallaxFactor, 1);
   }
 
   update() {

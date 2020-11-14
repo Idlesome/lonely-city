@@ -24,16 +24,16 @@ const SCENE_WIDTH = GAME_WIDTH * 4;
 const layers = [
   {
     name: '01walkway',
-    pallaxFactor: 1,
+    parallaxFactor: 1,
   },
   {
     name: '02clouds',
-    pallaxFactor: 0.08,
+    parallaxFactor: 0.08,
     passiveX: 0.08,
   },
   {
     name: '03mountains',
-    pallaxFactor: 0.16,
+    parallaxFactor: 0.16,
   },
 ];
 
@@ -61,11 +61,11 @@ class Beach extends Phaser.Scene {
    */
   preload() {
     layers.forEach(
-      ({ name, pallaxFactor, passiveX }) =>
+      ({ name, parallaxFactor, passiveX }) =>
         (this.backgrounds[name] = new Background({
           sceneName: 'Beach',
           assetName: name,
-          pallaxFactor,
+          parallaxFactor,
           context: this,
           passiveX,
         }))

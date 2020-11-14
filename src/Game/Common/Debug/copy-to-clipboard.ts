@@ -1,4 +1,4 @@
-export function copyToClipboard(text) {
+export function copyToClipboard(text: string) {
   var dummy = document.createElement('textarea');
   // to avoid breaking orgain page when copying more words
   // cant copy when adding below this code

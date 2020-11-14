@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
-// import { PlayableCharacter } from './PlayableCharacter';
 
-import { GAME_SCALE } from '../../config';
+import { GAME_SCALE } from 'config';
 
 // const SPEED = 100;
 const SPEED = 150;

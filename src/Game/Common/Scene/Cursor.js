@@ -1,7 +1,5 @@
-import Phaser from 'phaser';
-
-import { DEBUG } from '../../config';
-import { copyToClipboard } from '../../Common/Debug/copy-to-clipboard';
+import { DEBUG } from 'config';
+import { copyToClipboard } from 'Common/Debug/copy-to-clipboard';
 
 class Cursor {
   scene = null;

@@ -1,4 +1,4 @@
-import { DEBUG } from '../../config';
+import { DEBUG } from 'config';
 
 class BoundingBox {
   x = null;
