@@ -4,8 +4,8 @@ import Phaser from 'phaser';
 import { GAME_SCALE } from '../../config';
 
 // const SPEED = 100;
-// const SPEED = 150;
-const SPEED = 800;
+const SPEED = 150;
+// const SPEED = 800;
 
 const DEBUG = false;
 
@@ -143,6 +143,7 @@ class Bunny {
       .setSize(16, 8, false)
       // Set bounding box offset
       .setOffset(8, 22);
+    this.sprite.body.onWorldBounds = true;
     this
       // Start playing his idle animation to start off
       .play('bunny-idle-down');

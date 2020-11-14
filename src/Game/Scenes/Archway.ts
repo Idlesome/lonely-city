@@ -5,10 +5,13 @@ import { BoundingBox } from '../Common/Scene/BoundingBox';
 import { Bunny } from '../Common/Character/Bunny';
 import { Cursor } from '../Common/Scene/Cursor';
 import {
+  setupCamera,
+  startSceneOnWorldBounds,
+} from './Common/Transition';
+import {
   GAME_HEIGHT,
   GAME_WIDTH,
   GAME_SCALE,
-  SCENE_FADE_DURATION,
 } from '../config';
 
 const SCENE_WIDTH = GAME_WIDTH;
@@ -65,7 +68,7 @@ class Archway extends Phaser.Scene {
    */
   preload() {
     allLayers.forEach(
-      ({ name, pallaxFactor, passiveX }) =>
+      ({ name, pallaxFactor, passiveX }:any) =>
         (this.backgrounds[name] = new Background({
           sceneName: 'Archway',
           assetName: name,
@@ -81,16 +84,14 @@ class Archway extends Phaser.Scene {
 
   create() {
     this.createBackgroundLayers();
-
     this.sprites.bunny.create(43, 589);
-
     this.createForegroundLayers();
-
     this.sprites.cursor.create();
 
     this.createBoundingBoxes();
 
-    this.setupCamera();
+    startSceneOnWorldBounds('left', 'Beach', this);
+    setupCamera(this, SCENE_WIDTH);
   }
 
   update() {
@@ -156,36 +157,6 @@ class Archway extends Phaser.Scene {
     new BoundingBox(493, 296, -208, -174).create(
       this,
       bunny.sprite
-    );
-  }
-
-  setupCamera() {
-    this.cameras.main.fadeIn(SCENE_FADE_DURATION, 0, 0, 0);
-    this.cameras.main.setBounds(
-      0,
-      0,
-      SCENE_WIDTH,
-      GAME_HEIGHT
-    );
-    this.cameras.main.startFollow(
-      this.sprites.bunny.sprite,
-      true
-    );
-  }
-
-  setupFullscreenHandler() {
-    var FKey = this.input.keyboard.addKey('F');
-
-    FKey.on(
-      'down',
-      function () {
-        if (this.scale.isFullscreen) {
-          this.scale.stopFullscreen();
-        } else {
-          this.scale.startFullscreen();
-        }
-      },
-      this
     );
   }
 }

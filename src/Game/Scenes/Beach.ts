@@ -1,14 +1,19 @@
 import Phaser from 'phaser';
 
+import { Sprite } from 'types';
+
 import { Background } from '../Common/Background';
 import { Bunny } from '../Common/Character/Bunny';
 import { Cursor } from '../Common/Scene/Cursor';
 import { BoundingBox } from '../Common/Scene/BoundingBox';
 import {
+  startSceneOnWorldBounds,
+  setupCamera,
+} from './Common/Transition';
+import {
   GAME_HEIGHT,
   GAME_WIDTH,
   GAME_SCALE,
-  SCENE_FADE_DURATION,
 } from '../config';
 
 const SCENE_WIDTH = GAME_WIDTH * 4;
@@ -37,7 +42,10 @@ class Beach extends Phaser.Scene {
    * @param backgrounds A place to store our background sprites
    */
   backgrounds = {};
-  sprites = {
+  sprites: {
+    cursor: Sprite;
+    bunny: Sprite;
+  } = {
     cursor: null,
     bunny: null,
   };
@@ -85,51 +93,8 @@ class Beach extends Phaser.Scene {
 
     this.createBoundingBoxes();
 
-    this.cameras.main.fadeIn(SCENE_FADE_DURATION, 0, 0, 0);
-
-    this.cameras.main.setBounds(
-      0,
-      0,
-      SCENE_WIDTH,
-      GAME_HEIGHT
-    );
-    this.physics.world.setBounds(
-      0,
-      0,
-      SCENE_WIDTH,
-      GAME_HEIGHT
-    );
-    this.cameras.main.startFollow(
-      this.sprites.bunny.sprite,
-      true
-    );
-
-    this.setupFullscreenHandler();
-
-    const scene = this;
-
-    scene.input.on(
-      'pointerup',
-      function (pointer) {
-        this.endScene();
-
-        this.lastClickX =
-          pointer.x + scene.cameras.main._scrollX;
-        this.lastClickY =
-          pointer.y + scene.cameras.main._scrollY;
-      },
-      this
-    );
-  }
-
-  endScene() {
-    this.cameras.main.fade(SCENE_FADE_DURATION, 0, 0, 0);
-    this.cameras.main.once(
-      Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
-      () => {
-        this.scene.start('Archway');
-      }
-    );
+    startSceneOnWorldBounds('right', 'Archway', this);
+    setupCamera(this, SCENE_WIDTH);
   }
 
   update() {
@@ -191,22 +156,6 @@ class Beach extends Phaser.Scene {
     new BoundingBox(449, 475, 27, 61, 'walkwaytop3').create(
       this,
       bunny.sprite
-    );
-  }
-
-  setupFullscreenHandler() {
-    var FKey = this.input.keyboard.addKey('F');
-
-    FKey.on(
-      'down',
-      function () {
-        if (this.scale.isFullscreen) {
-          this.scale.stopFullscreen();
-        } else {
-          this.scale.startFullscreen();
-        }
-      },
-      this
     );
   }
 }
