@@ -10,7 +10,7 @@ import {
   GAME_SCALE,
 } from '../config';
 
-const SCENE_WIDTH = GAME_WIDTH * 3;
+const SCENE_WIDTH = GAME_WIDTH * 4;
 // const SCENE_HEIGHT = GAME_HEIGHT;
 
 // A list of our assets so we can load them in using
@@ -85,6 +85,12 @@ class Beach extends Phaser.Scene {
     this.createBoundingBoxes();
 
     this.cameras.main.setBounds(
+      0,
+      0,
+      SCENE_WIDTH,
+      GAME_HEIGHT
+    );
+    this.physics.world.setBounds(
       0,
       0,
       SCENE_WIDTH,
