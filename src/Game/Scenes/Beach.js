@@ -131,7 +131,7 @@ class Beach extends Phaser.Scene {
     new BoundingBox(
       372,
       630,
-      649,
+      3800,
       17,
       'walkwaybottom'
     ).create(this, bunny.sprite);
@@ -168,7 +168,7 @@ class Beach extends Phaser.Scene {
     new BoundingBox(
       480,
       521,
-      740,
+      3600,
       20,
       'walkwaytop2'
     ).create(this, bunny.sprite);
