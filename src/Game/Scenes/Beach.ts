@@ -16,6 +16,7 @@ import {
   GAME_HEIGHT,
   GAME_WIDTH,
   GAME_SCALE,
+  ENABLE_AUDIO,
 } from '../config';
 
 const SCENE_WIDTH = GAME_WIDTH * 4;
@@ -61,6 +62,11 @@ class Beach extends Phaser.Scene {
    * This stuff loads before the game starts; stuff like scenes and whatnot.
    */
   preload() {
+    ENABLE_AUDIO &&
+      this.load.audio('beach', [
+        'public/audio/soundtrack/beach.mp3',
+      ]);
+
     layers.forEach(
       ({ name, parallaxFactor, passiveX }) =>
         (this.backgrounds[name] = new Background({
@@ -96,6 +102,12 @@ class Beach extends Phaser.Scene {
 
     startSceneOnWorldBounds('right', 'Archway', this);
     setupCamera(this, SCENE_WIDTH);
+
+    if (ENABLE_AUDIO) {
+      const music = this.sound.add('beach');
+
+      music.play('', { loop: true });
+    }
 
     this.debugger = new Debugger(this);
   }

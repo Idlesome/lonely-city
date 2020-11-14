@@ -11,4 +11,6 @@ export const GAME_SCALE = 4;
 
 export const DEBUG = true;
 
+export const ENABLE_AUDIO = false;
+
 export const SCENE_FADE_DURATION = 1000;
