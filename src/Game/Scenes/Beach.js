@@ -138,7 +138,7 @@ class Beach extends Phaser.Scene {
       'walkwaytop'
     ).create(this, bunny.sprite);
     //beach top 1
-    new BoundingBox(11, 297, 331, 80, 'beachtop').create(
+    new BoundingBox(10, 379, 332, 74, 'beachtop').create(
       this,
       bunny.sprite
     );
@@ -150,6 +150,27 @@ class Beach extends Phaser.Scene {
       118,
       'beachbottomwater'
     ).create(this, bunny.sprite);
+    //beach bottom (water) 2
+    new BoundingBox(
+      602,
+      650,
+      101,
+      53,
+      'beachbottomwater2'
+    ).create(this, bunny.sprite);
+    //walkway top 2
+    new BoundingBox(
+      480,
+      521,
+      740,
+      20,
+      'walkwaytop2'
+    ).create(this, bunny.sprite);
+    //walkway top 3
+    new BoundingBox(449, 475, 27, 61, 'walkwaytop3').create(
+      this,
+      bunny.sprite
+    );
   }
 
   setupFullscreenHandler() {
