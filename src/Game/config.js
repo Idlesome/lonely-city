@@ -10,3 +10,5 @@ export const GAME_CENTER_Y = 384;
 export const GAME_SCALE = 4;
 
 export const DEBUG = true;
+
+export const SCENE_FADE_DURATION = 1000;

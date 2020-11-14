@@ -8,6 +8,7 @@ import {
   GAME_HEIGHT,
   GAME_WIDTH,
   GAME_SCALE,
+  SCENE_FADE_DURATION,
 } from '../config';
 
 const SCENE_WIDTH = GAME_WIDTH * 4;
@@ -84,6 +85,8 @@ class Beach extends Phaser.Scene {
 
     this.createBoundingBoxes();
 
+    this.cameras.main.fadeIn(SCENE_FADE_DURATION, 0, 0, 0);
+
     this.cameras.main.setBounds(
       0,
       0,
@@ -108,12 +111,24 @@ class Beach extends Phaser.Scene {
     scene.input.on(
       'pointerup',
       function (pointer) {
+        this.endScene();
+
         this.lastClickX =
           pointer.x + scene.cameras.main._scrollX;
         this.lastClickY =
           pointer.y + scene.cameras.main._scrollY;
       },
       this
+    );
+  }
+
+  endScene() {
+    this.cameras.main.fade(SCENE_FADE_DURATION, 0, 0, 0);
+    this.cameras.main.once(
+      Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
+      () => {
+        this.scene.start('Archway');
+      }
     );
   }
 

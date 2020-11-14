@@ -8,6 +8,7 @@ import {
   GAME_HEIGHT,
   GAME_WIDTH,
   GAME_SCALE,
+  SCENE_FADE_DURATION,
 } from '../config';
 
 const SCENE_WIDTH = GAME_WIDTH;
@@ -90,7 +91,6 @@ class Archway extends Phaser.Scene {
     this.createBoundingBoxes();
 
     this.setupCamera();
-    // TODO: Trigger start of next scene...
   }
 
   update() {
@@ -160,6 +160,7 @@ class Archway extends Phaser.Scene {
   }
 
   setupCamera() {
+    this.cameras.main.fadeIn(SCENE_FADE_DURATION, 0, 0, 0);
     this.cameras.main.setBounds(
       0,
       0,
