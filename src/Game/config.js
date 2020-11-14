@@ -1,3 +1,5 @@
+// 256 x 192 asset size
+
 // Capitals means that it's an unchangable constant.
 export const GAME_WIDTH = 1024;
 export const GAME_HEIGHT = 768;
