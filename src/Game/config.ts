@@ -9,8 +9,8 @@ export const GAME_CENTER_Y = 384;
 // export const GAME_SCALE = 1.5;
 export const GAME_SCALE = 4;
 
-export const DEBUG = true;
+export const DEBUG = false;
 
-export const ENABLE_AUDIO = false;
+export const ENABLE_AUDIO = true;
 
 export const SCENE_FADE_DURATION = 1000;
