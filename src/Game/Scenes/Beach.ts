@@ -53,6 +53,7 @@ class Beach extends Phaser.Scene {
     bunny: null,
   };
   debugger;
+  music: Phaser.Sound.BaseSound;
 
   constructor() {
     super({ key: 'Beach' });
@@ -103,10 +104,10 @@ class Beach extends Phaser.Scene {
     startSceneOnWorldBounds('right', 'Archway', this);
     setupCamera(this, SCENE_WIDTH);
 
-    if (ENABLE_AUDIO) {
-      const music = this.sound.add('beach');
+    if (ENABLE_AUDIO && !this.music) {
+      this.music = this.sound.add('beach');
 
-      music.play('', { loop: true });
+      this.music.play('', { loop: true });
     }
 
     this.debugger = new Debugger(this);
