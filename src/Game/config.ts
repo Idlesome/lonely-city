@@ -1,4 +1,4 @@
-// 256 x 192 asset size
+// 256 x 192 asset size for bg
 
 // Capitals means that it's an unchangable constant.
 export const GAME_WIDTH = 1024;
@@ -9,8 +9,8 @@ export const GAME_CENTER_Y = 384;
 // export const GAME_SCALE = 1.5;
 export const GAME_SCALE = 4;
 
-export const DEBUG = false;
+export const DEBUG = true;
 
-export const ENABLE_AUDIO = true;
+export const ENABLE_AUDIO = false;
 
 export const SCENE_FADE_DURATION = 1000;

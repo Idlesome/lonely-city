@@ -13,6 +13,7 @@ import {
   GAME_WIDTH,
   GAME_SCALE,
 } from '../config';
+import { Debugger } from '../Common/Debug/Debugger';
 
 const SCENE_WIDTH = GAME_WIDTH;
 // const SCENE_HEIGHT = GAME_HEIGHT;
@@ -56,6 +57,7 @@ class Archway extends Phaser.Scene {
     cursor: null,
     bunny: null,
   };
+  debugger;
 
   constructor() {
     super({ key: 'Archway' });
@@ -93,11 +95,13 @@ class Archway extends Phaser.Scene {
       bunnyStartY: 551,
     });
     setupCamera(this, SCENE_WIDTH);
+    this.debugger = new Debugger(this);
   }
 
   update() {
     this.sprites.bunny.update();
     this.sprites.cursor.update();
+    this.debugger.update();
 
     this.backgrounds['02archwayclouds'].update();
   }
@@ -140,25 +144,26 @@ class Archway extends Phaser.Scene {
     const { bunny } = this.sprites;
 
     // Walkway bottom
-    new BoundingBox(0, 633, 983, 69).create(
-      this,
-      bunny.sprite
-    );
+    new BoundingBox(
+      0,
+      633,
+      983,
+      69,
+      'walkway bottom'
+    ).create(this, bunny.sprite);
     // Walkway top
-    new BoundingBox(6, 362, 997, 112).create(
+    new BoundingBox(1, 482, 1009, 85, 'walkway top').create(
       this,
       bunny.sprite
     );
     // Walkway right
-    new BoundingBox(984, 216, 31, 486).create(
-      this,
-      bunny.sprite
-    );
-    // Walkway right
-    new BoundingBox(493, 296, -208, -174).create(
-      this,
-      bunny.sprite
-    );
+    new BoundingBox(
+      984,
+      216,
+      31,
+      486,
+      'walkway right'
+    ).create(this, bunny.sprite);
   }
 }
 

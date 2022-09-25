@@ -9,10 +9,10 @@ const config = {
   type: Phaser.AUTO,
   scale: {
     mode: Phaser.Scale.FIT,
-    parent: 'mindcops',
+    parent: 'lonely-city',
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  parent: 'mindcops',
+  parent: 'lonely-city',
   width: GAME_WIDTH,
   height: GAME_HEIGHT,
   // scene: {
@@ -37,4 +37,6 @@ const config = {
     // , TitleScene, GameScene
   ],
 };
+// Disabled because this might be useful in future
+// eslint-disable-next-line no-unused-vars
 const game = new Phaser.Game(config);
