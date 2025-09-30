@@ -1,1 +1,0 @@
-export { Washout } from './Washout';

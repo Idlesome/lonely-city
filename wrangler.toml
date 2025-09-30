@@ -1,9 +1,9 @@
-name = "mindcops-revolution"
+account_id = "5eb34458406454dda5a7f7b2e6c9a6eb"
+name = "lonely-city"
+route = "lonely-city.floatingdown.stream/*"
 type = "webpack"
-account_id = "786e56421522c0cd1b1977e311f0c6db"
 workers_dev = false
-route = "mindcops.floatingdown.stream/*"
-zone_id = "f8925ca4aa75911e67038de912d47ed6"
+zone_id = "32dcf0687fc417c71c54b1fd0f196fab"
 
 [site]
 bucket = "./dist"
